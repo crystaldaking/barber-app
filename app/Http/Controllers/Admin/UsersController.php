@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Role;
 
 class UsersController extends Controller
 {
@@ -36,7 +37,13 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        return view('admin.users.edit')->with([
+            'user' => $user,
+            'roles'=> $roles
+        ]);
+
+        //dd($user);
     }
 
     /**
@@ -48,7 +55,10 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->roles()->sync($request->roles);
+        return redirect()->route('admin.users.index');
+
+        //dd($request);
     }
 
     /**
