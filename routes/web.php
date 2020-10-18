@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,4 +19,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/admin/users',\App\Http\Controllers\Admin\UsersController::class,['except' => ['show','create','store']]);
+
+Route::namespace("App\Http\Controllers\Admin")->prefix("admin")->name("admin.")->group(function (){
+    Route::resource("/users",UsersController::class,["except"=>["show","create","store"]]);
+});
