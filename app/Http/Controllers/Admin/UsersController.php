@@ -61,6 +61,10 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $user->roles()->sync($request->roles);
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->save();
+
         return redirect()->route('admin.users.index');
 
         //dd($request);
