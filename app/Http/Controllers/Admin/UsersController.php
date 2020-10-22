@@ -66,8 +66,6 @@ class UsersController extends Controller
         $user->save();
 
         return redirect()->route('admin.users.index');
-
-        //dd($request);
     }
 
     /**
@@ -78,7 +76,7 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        if (Gate::denies('detele-users')) {
+        if (Gate::denies('delete-users')) {
             return redirect(route('admin.users.index'));
         }
         $user->roles()->detach();
