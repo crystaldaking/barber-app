@@ -55,10 +55,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
+                                    @can('manage-users')
                                     <a class="dropdown-item" href="{{route('admin.users.index')}}">
                                         User managment
                                     </a>
+                                    @endcan
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

@@ -26,12 +26,16 @@
                                         <td>{{$user->phone}}</td>
                                         <td>{{implode(',',$user->roles()->get()->pluck('name')->toArray())}}</td>
                                         <td>
-                                            <a href="{{route('admin.users.edit',$user->id)}}"><button type="button" class="btn btn-primary">Edit</button></a>
-                                            <form action="{{route('admin.users.destroy',$user->id)}}" class="float-left">
-                                                @csrf
-                                                {{method_field('DELETE')}}
-                                                <button type="submit" class="btn btn-warning">Delete</button>
-                                            </form>
+                                            @can('edit-users')
+                                                <a href="{{route('admin.users.edit',$user->id)}}"><button type="button" class="btn btn-primary">Edit</button></a>
+                                            @endcan
+                                            @can('delete-users')
+                                                <form action="{{route('admin.users.destroy',$user->id)}}" class="float-left">
+                                                    @csrf
+                                                    {{method_field('DELETE')}}
+                                                    <button type="submit" class="btn btn-warning">Delete</button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
