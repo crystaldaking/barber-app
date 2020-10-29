@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class RolesTableSeeder extends Seeder
 {
@@ -14,7 +15,9 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        Role::truncate();
+
+        Role::query()->delete();
+        DB::table('role_user')->delete();
 
         Role::create(['name' => 'Admin']);
         Role::create(['name' => 'Moderator']);
