@@ -22,7 +22,10 @@ class UsersTableSeeder extends Seeder
 
         $adminRole = Role::where('name','Admin')->first();
         $moderatorRole = Role::where('name','Moderator')->first();
-        $userRole = Role::where('name','User')->first();
+        $basicRole = Role::where('name','Basic')->first();
+        $silverRole = Role::where('name','Silver')->first();
+        $goldRole = Role::where('name','Gold')->first();
+
 
         $admin = User::create([
             'name' => 'Admin User',
@@ -36,14 +39,30 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('mypass')
         ]);
 
-        $user = User::create([
-            'name' => 'User',
-            'phone' => '+375296895766',
+        $basicUser = User::create([
+            'name' => 'Basic client',
+            'phone' => '+37525111111',
             'password' => Hash::make('mypass')
         ]);
 
+        $silverUser = User::create([
+            'name' => 'Sliver client',
+            'phone' => '+37525111112',
+            'password' => Hash::make('mypass')
+        ]);
+
+        $goldUser = User::create([
+            'name' => 'Gold client',
+            'phone' => '+37525111113',
+            'password' => Hash::make('mypass')
+        ]);
+
+
         $admin->roles()->attach($adminRole);
         $moderator->roles()->attach($moderatorRole);
-        $user->roles()->attach($userRole);
+
+        $basicUser->roles()->attach($basicRole);
+        $silverUser->roles()->attach($silverRole);
+        $goldUser->roles()->attach($goldRole);
     }
 }

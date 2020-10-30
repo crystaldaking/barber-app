@@ -21,6 +21,9 @@ class RolesTableSeeder extends Seeder
 
         Role::create(['name' => 'Admin']);
         Role::create(['name' => 'Moderator']);
-        Role::create(['name' => 'User']);
+
+        Role::create(['name' => 'Basic']);
+        Role::create(['name' => 'Silver']);
+        Role::create(['name' => 'Gold']);
     }
 }
