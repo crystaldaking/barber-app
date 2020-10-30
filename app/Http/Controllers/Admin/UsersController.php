@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\View\View;
 
 class UsersController extends Controller
 {
@@ -34,7 +36,7 @@ class UsersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function edit(User $user)
     {
@@ -56,14 +58,18 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function update(Request $request, User $user)
     {
         $user->roles()->sync($request->roles);
         $user->name = $request->name;
         $user->phone = $request->phone;
-        $user->save();
+
+        if ($user->save())
+            $request->session()->flash('success','Client has been updated');
+        else
+            $request->session()->flash('danger','Client updated has errors');
 
         return redirect()->route('admin.users.index');
     }
