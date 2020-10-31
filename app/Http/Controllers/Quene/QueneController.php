@@ -12,7 +12,21 @@ class QueneController extends Controller
 {
     public function index()
     {
-        $quene = Quene::all();
+        $quene = Quene::where('complete',0)->get();
         return view('quene.index')->with('quene',$quene);
+    }
+
+    /**
+     * Set quene as completed
+     * @param Quene $quene
+     */
+
+    public function edit(Request $request,Quene $quene)
+    {
+        $quene->complete = true;
+        $quene->save();
+
+        $request->session()->flash('success','Client removed from quene');
+        return redirect()->route('quene.quene.index');
     }
 }

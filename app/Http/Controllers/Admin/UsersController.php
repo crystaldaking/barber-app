@@ -50,7 +50,6 @@ class UsersController extends Controller
             'roles'=> $roles
         ]);
 
-        //dd($user);
     }
 
     /**

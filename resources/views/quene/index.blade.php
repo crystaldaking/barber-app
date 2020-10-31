@@ -15,7 +15,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Phone</th>
                                 <th scope="col">Role</th>
-                                @can('edit-useres')
+                                @can('edit-users')
                                     <th scope="col">Actions</th>
                                 @endcan
                             </tr>
@@ -29,7 +29,7 @@
                                     <td>{{implode(',',$item->user->roles()->get()->pluck('name')->toArray())}}</td>
                                     <td>
                                         @can('edit-users')
-                                            <a href=""><button type="button" class="btn btn-primary">Done</button></a>
+                                            <a href="{{route('quene.quene.edit',$item)}}"><button type="button" class="btn btn-primary">Done</button></a>
                                         @endcan
                                     </td>
                                 </tr>
