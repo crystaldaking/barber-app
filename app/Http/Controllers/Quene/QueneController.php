@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Quene;
 use App\Http\Controllers\Controller;
 use App\Models\Quene;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,8 +13,14 @@ class QueneController extends Controller
 {
     public function index()
     {
+        /** @var Collection $quene */
         $quene = Quene::where('complete',0)->get();
-        return view('quene.index')->with('quene',$quene);
+
+        $sorted = $quene->sortBy(function ($item) {
+            return $item->user->getRank();
+        });
+
+        return view('quene.index')->with('quene',$sorted);
     }
 
     /**

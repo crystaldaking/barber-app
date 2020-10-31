@@ -47,7 +47,7 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class)->orderBy('rank','asc');
     }
 
     /**
@@ -72,6 +72,11 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    public function getRank()
+    {
+       return $this->roles()->select('rank')->first()->rank;
     }
 
     /**
