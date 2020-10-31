@@ -51,6 +51,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Add quene relationshop
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+
+    public function quene()
+    {
+        return $this->hasMany(Quene::class);
+    }
+
+    /**
      * Check any role
      * @param $roles Role
      * @return boolean
@@ -77,5 +87,6 @@ class User extends Authenticatable
 
         return false;
     }
+
 
 }

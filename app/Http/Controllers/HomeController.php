@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Quene;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator')) {
+            return redirect()->route('admin.users.index');
+        } else {
+            $matchFields = ['user_id' => Auth::user()->id, 'complete' => 'false'];
+            if (Quene::where($matchFields)->get()->isEmpty()) {
+                $quene = new Quene();
+                $quene->user_id = Auth::user()->id;
+                $quene->save();
+            }
+            return view('home');
+        }
     }
 }
