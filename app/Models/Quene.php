@@ -17,6 +17,7 @@ class Quene extends Model
     protected $table = 'quene';
 
     protected $fillable = [
+        'id',
         'user_id',
     ];
 

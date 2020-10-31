@@ -24,3 +24,4 @@ Route::namespace("App\Http\Controllers\Admin")->prefix("admin")->name("admin.")-
     Route::resource("/users",UsersController::class,["except"=>["show","create","store"]]);
 });
 
+Route::get('/quene', [\App\Http\Controllers\Quene\QueneController::class,'index']);

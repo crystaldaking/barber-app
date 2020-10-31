@@ -57,7 +57,7 @@ class User extends Authenticatable
 
     public function quene()
     {
-        return $this->hasMany(Quene::class);
+        return $this->hasOne(Quene::class);
     }
 
     /**

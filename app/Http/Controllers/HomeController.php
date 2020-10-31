@@ -23,7 +23,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator')) {
             return redirect()->route('admin.users.index');
@@ -33,6 +33,8 @@ class HomeController extends Controller
                 $quene = new Quene();
                 $quene->user_id = Auth::user()->id;
                 $quene->save();
+            } else {
+                $request->session()->flash('danger','You are already in the queue!');
             }
             return view('home');
         }
