@@ -59,6 +59,9 @@
                                     <a class="dropdown-item" href="{{route('admin.users.index')}}">
                                         User managment
                                     </a>
+                                    <a class="dropdown-item" href="{{route('quene.quene.index')}}">
+                                        Quene managment
+                                    </a>
                                     @endcan
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
