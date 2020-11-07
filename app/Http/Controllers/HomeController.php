@@ -32,6 +32,7 @@ class HomeController extends Controller
             if (Quene::where($matchFields)->get()->isEmpty()) {
                 $quene = new Quene();
                 $quene->user_id = Auth::user()->id;
+                $quene->updated_at = now();
                 $quene->save();
             } else {
                 $request->session()->flash('danger','You are already in the queue!');

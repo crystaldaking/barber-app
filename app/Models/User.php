@@ -33,6 +33,12 @@ class User extends Authenticatable
     ];
 
     /**
+     * Date Format
+     * @var string
+     */
+    protected $dateFormat = 'H:i:s';
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -74,6 +80,10 @@ class User extends Authenticatable
         return false;
     }
 
+    /**
+     * Get user rank based on role
+     * @return int
+     */
     public function getRank()
     {
        return $this->roles()->select('rank')->first()->rank;
@@ -92,6 +102,4 @@ class User extends Authenticatable
 
         return false;
     }
-
-
 }

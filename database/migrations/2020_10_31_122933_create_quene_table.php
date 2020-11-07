@@ -17,7 +17,6 @@ class CreateQueneTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->index();
             $table->boolean('complete')->default(false);
-            $table->string('status');
             $table->timestamps();
         });
     }
