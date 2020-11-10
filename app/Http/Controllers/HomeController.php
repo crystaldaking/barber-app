@@ -36,7 +36,6 @@ class HomeController extends Controller
             $current_date = now();
 
             if ($current_date->gt($role_date)){
-
                 $user = Auth::user();
                 $user->roles()->sync((array)Role::select('id')->where('name','Basic')->first()->id);
                 $user->save();
