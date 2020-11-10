@@ -50,6 +50,7 @@
                                             <label>{{$role->name}}</label>
                                         </div>
                                     @endforeach
+                                    <input type="date" name="role_date" value="{{\Carbon\Carbon::parse($user->role_date)->format('Y-m-d')}}">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">

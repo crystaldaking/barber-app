@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quene;
+use App\Models\Role;
+use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +32,16 @@ class HomeController extends Controller
             return redirect()->route('admin.users.index');
         } else {
             $matchFields = ['user_id' => Auth::user()->id, 'complete' => 'false'];
+            $role_date = Auth::user()->role_date;
+            $current_date = now();
+
+            if ($current_date->gt($role_date)){
+                $user = Auth::user();
+                $user->roles()->detach();
+                $user->roles()->attach(Role::select('id')->where('name','Basic')->first());
+                $user->save();
+            }
+
             if (Quene::where($matchFields)->get()->isEmpty()) {
                 $quene = new Quene();
                 $quene->user_id = Auth::user()->id;

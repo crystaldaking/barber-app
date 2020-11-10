@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'phone',
         'password',
+        'role_date'
     ];
 
     /**
@@ -33,12 +34,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * Date Format
-     * @var string
-     */
-    protected $dateFormat = 'H:i:s';
-
-    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -46,6 +41,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public $timestamps = false;
 
     /**
      * Add role relationship

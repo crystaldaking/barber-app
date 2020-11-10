@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Role;
@@ -64,6 +65,7 @@ class UsersController extends Controller
         $user->roles()->sync($request->roles);
         $user->name = $request->name;
         $user->phone = $request->phone;
+        $user->role_date = Carbon::createFromFormat('Y-m-d',$request->role_date);
 
         if ($user->save())
             $request->session()->flash('success','Client has been updated');

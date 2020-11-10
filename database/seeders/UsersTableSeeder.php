@@ -30,31 +30,31 @@ class UsersTableSeeder extends Seeder
         $admin = User::create([
             'name' => 'Admin User',
             'phone' => '+375293164122',
-            'password' => Hash::make('mypass')
+            'password' => Hash::make('mypass'),
         ]);
 
         $moderator = User::create([
             'name' => 'Moderator User',
             'phone' => '+375256061834',
-            'password' => Hash::make('mypass')
+            'password' => Hash::make('mypass'),
         ]);
 
         $basicUser = User::create([
             'name' => 'Basic client',
             'phone' => '+37525111111',
-            'password' => Hash::make('mypass')
+            'password' => Hash::make('mypass'),
         ]);
 
         $silverUser = User::create([
             'name' => 'Sliver client',
             'phone' => '+37525111112',
-            'password' => Hash::make('mypass')
+            'password' => Hash::make('mypass'),
         ]);
 
         $goldUser = User::create([
             'name' => 'Gold client',
             'phone' => '+37525111113',
-            'password' => Hash::make('mypass')
+            'password' => Hash::make('mypass'),
         ]);
 
 
