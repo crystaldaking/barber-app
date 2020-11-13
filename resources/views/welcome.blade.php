@@ -15,19 +15,34 @@
         </style>
 
         <style>
+            /* body стиль не нужен */
             body {
-                font-family: 'Nunito';
+                margin: 0;
             }
-            .iframe-left {
-                width: 50vw;
+
+            .row-iframe {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                height: 100vh;
             }
+            .col-iframe {
+                flex: 0 0 50%;
+                height: 100%;
+            }
+
         </style>
     </head>
-    <iframe src="{{url('quene')}}" class="iframe-left">
+    <div class="row-iframe">
+        <iframe class="col-iframe" src="{{url('quene')}}" frameborder="0"></iframe>
+        <iframe class="col-iframe" src="{{url('login')}}" frameborder="0"></iframe>
+    </div>
+
+    {{--<iframe src="{{url('quene')}}" class="iframe-left">
 
     </iframe>
 
     <iframe src="{{url('login')}}" class="iframe-left">
 
-    </iframe>
+    </iframe>--}}
 </html>
