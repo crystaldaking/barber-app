@@ -5,8 +5,19 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Quene') }}</div>
+                    @can('edit-users')
+                    <div class="card-header">
+                        Quene status: {{env('APP_QUENE')}}
 
+                        @if(env('APP_QUENE') == 'ACTIVE')
+                            <a href=""><button type="button" class="btn btn-danger">Stop</button></a>
+                        @else
+                            <a href=""><button type="button" class="btn btn-primary">Resume</button></a>
+                        @endif
+
+                    </div>
+
+                    @endcan
                     <div class="card-body">
                         <table class="table">
                             <thead>

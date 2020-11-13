@@ -14,13 +14,13 @@ class QueneController extends Controller
     public function index()
     {
         /** @var Collection $quene */
-        $quene = Quene::where('complete',0)->get();
+        $quene = Quene::where('complete', 0)->get();
 
         $sorted = $quene->sortBy(function ($item) {
             return $item->user->getRank();
         });
 
-        return view('quene.index')->with('quene',$sorted);
+        return view('quene.index')->with('quene', $sorted);
     }
 
     /**
@@ -28,12 +28,13 @@ class QueneController extends Controller
      * @param Quene $quene
      */
 
-    public function edit(Request $request,Quene $quene)
+    public function edit(Request $request, Quene $quene)
     {
         $quene->complete = true;
         $quene->save();
 
-        $request->session()->flash('success','Client removed from quene');
+        $request->session()->flash('success', 'Client removed from quene');
         return redirect()->route('quene.quene.index');
     }
+
 }

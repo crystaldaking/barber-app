@@ -27,3 +27,4 @@ Route::namespace("App\Http\Controllers\Admin")->prefix("admin")->name("admin.")-
 Route::namespace("App\Http\Controllers\Quene")->name("quene.")->group(function () {
     Route::resource("/quene", QueneController::class, ["except" => ["show","create","store"]]);
 });
+
