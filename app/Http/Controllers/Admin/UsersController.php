@@ -65,6 +65,7 @@ class UsersController extends Controller
         $user->roles()->sync($request->roles);
         $user->name = $request->name;
         $user->phone = $request->phone;
+        $user->lastName = $request->lastName;
         $user->role_date = Carbon::createFromFormat('Y-m-d',$request->role_date);
 
         if ($user->save())
