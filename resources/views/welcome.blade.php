@@ -32,17 +32,18 @@
             }
 
         </style>
+        <script>
+            function refreshIFrame() {
+                var x = document.getElementById("quene_frame");
+                x.contentWindow.location.reload();
+                var t = setTimeout(refreshIFrame, 10000);
+            }
+        </script>
     </head>
-    <div class="row-iframe">
-        <iframe class="col-iframe" src="{{url('quene')}}" frameborder="0"></iframe>
-        <iframe class="col-iframe" src="{{url('login')}}" frameborder="0"></iframe>
-    </div>
-
-    {{--<iframe src="{{url('quene')}}" class="iframe-left">
-
-    </iframe>
-
-    <iframe src="{{url('login')}}" class="iframe-left">
-
-    </iframe>--}}
+    <body onload="refreshIFrame()">
+        <div class="row-iframe">
+            <iframe id="quene_frame" class="col-iframe" src="{{url('quene')}}" frameborder="0"></iframe>
+            <iframe class="col-iframe" src="{{url('login')}}" frameborder="0"></iframe>
+        </div>
+    <body>
 </html>
