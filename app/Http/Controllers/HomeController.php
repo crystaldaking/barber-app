@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Valuestore\Valuestore;
 
 class HomeController extends Controller
 {
@@ -31,7 +32,15 @@ class HomeController extends Controller
         if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator')) {
             return redirect()->route('admin.users.index');
         } else {
-            $matchFields = ['user_id' => Auth::user()->id, 'complete' => 'false'];
+
+            $settings = Valuestore::make(storage_path('app/settings.json'));
+            if ($settings->get('app_active') != 'active'){
+                $request->session()->flash('danger','Quene is closed');
+                return view('home');
+            }
+
+
+            $matchFields = ['user_id' => Auth::user()->id, 'status' => 'In progress'];
             $role_date = Auth::user()->role_date;
             $current_date = now();
 
@@ -45,6 +54,7 @@ class HomeController extends Controller
                 $quene = new Quene();
                 $quene->user_id = Auth::user()->id;
                 $quene->updated_at = now();
+                $quene->status = 'Served';
                 $quene->save();
             } else {
                 $request->session()->flash('danger','You are already in the queue!');

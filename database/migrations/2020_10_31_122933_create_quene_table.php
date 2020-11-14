@@ -16,7 +16,7 @@ class CreateQueneTable extends Migration
         Schema::create('quene', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->index();
-            $table->boolean('complete')->default(false);
+            $table->string('status')->default('Free');
             $table->timestamps();
         });
     }

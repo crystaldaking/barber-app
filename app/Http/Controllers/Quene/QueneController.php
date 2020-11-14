@@ -8,32 +8,44 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Valuestore\Valuestore;
 
 class QueneController extends Controller
 {
     public function index()
     {
         /** @var Collection $quene */
-        $quene = Quene::where('complete', 0)->get();
+        $quene = Quene::where('status','not like',"%Exited%")->get();
+        $settings = Valuestore::make(storage_path('app/settings.json'));
 
         $sorted = $quene->sortBy(function ($item) {
             return $item->user->getRank();
         });
 
-        return view('quene.index')->with('quene', $sorted);
+        $data = ['quene' => $sorted,'settings' => $settings];
+
+        return view('quene.index')->with($data);
     }
 
     /**
-     * Set quene as completed
+     * Set quene as served or completed
      * @param Quene $quene
      */
 
-    public function edit(Request $request, Quene $quene)
+    public function status(Request $request,$id,$completed)
     {
-        $quene->complete = true;
-        $quene->save();
+        $quene = Quene::find($id);
 
-        $request->session()->flash('success', 'Client removed from quene');
+        if ($completed == '1'){
+            $quene->status = 'Served';
+            $request->session()->flash('success', 'Client served');
+        }
+        if ($completed == '0'){
+            $quene->status = 'Exited';
+            $request->session()->flash('success', 'Client exited');
+        }
+
+        $quene->save();
         return redirect()->route('quene.quene.index');
     }
 

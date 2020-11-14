@@ -7,12 +7,12 @@
                 <div class="card">
                     @can('edit-users')
                     <div class="card-header">
-                        Quene status: {{env('APP_QUENE')}}
+                        Quene status: {{$settings->get('app_active')}}
 
-                        @if(env('APP_QUENE') == 'ACTIVE')
-                            <a href=""><button type="button" class="btn btn-danger">Stop</button></a>
+                        @if($settings->get('app_active') == 'active')
+                            <a href="{{route('global',['status' => 0])}}"><button type="button" class="btn btn-danger">Stop</button></a>
                         @else
-                            <a href=""><button type="button" class="btn btn-primary">Resume</button></a>
+                            <a href="{{route('global',['status' => 1])}}"><button type="button" class="btn btn-primary">Resume</button></a>
                         @endif
 
                     </div>
@@ -29,8 +29,10 @@
                                 @endcan
                                 <th scope="col">Role</th>
                                 <th scope="col">Time</th>
+                                <th scope="col">Status</th>
                                 @can('edit-users')
-                                    <th scope="col">Actions</th>
+                                    <th scope="col">Serve</th>
+                                    <th scope="col">Exit</th>
                                 @endcan
                             </tr>
                             </thead>
@@ -42,9 +44,15 @@
                                     <td>{{$item->user->phone}}</td>
                                     <td>{{implode(',',$item->user->roles()->get()->pluck('name')->toArray())}}</td>
                                     <td>{{$item->updated_at->format('H:i')}}</td>
+                                    <td>{{$item->status}}</td>
                                     <td>
                                         @can('edit-users')
-                                            <a href="{{route('quene.quene.edit',$item)}}"><button type="button" class="btn btn-primary">Serve</button></a>
+                                            <a href="{{route('status',['id' => $item->id, 'completed' => '1'])}}"><button type="button" class="btn btn-primary">Serve</button></a>
+                                        @endcan
+                                    </td>
+                                    <td>
+                                        @can('edit-users')
+                                            <a href="{{route('status',['id' => $item->id, 'completed' => '0'])}}"><button type="button" class="btn btn-primary">Exit</button></a>
                                         @endcan
                                     </td>
                                 </tr>
